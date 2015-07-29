@@ -1,0 +1,23 @@
+{
+  "name": "palindromer",
+  "version": "0.0.1",
+  "description": "A simple RESTful API to submit and view palindromes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SeanReece/palindromer.git"
+  },
+  "author": "Sean Reece <reece.sean@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SeanReece/palindromer/issues"
+  },
+  "homepage": "https://github.com/SeanReece/palindromer#readme",
+  "dependencies": {
+    "express": "^4.13.1",
+    "mongoose": "^4.1.0"
+  }
+}
