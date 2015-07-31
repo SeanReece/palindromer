@@ -98,7 +98,7 @@ describe('Routing', function() {
       .expect(200)
       .end(function(err, res){
         if (err) return done(err);
-        assert(res.body.length > 2);
+        assert(res.body.length >= 2);
         done();
       });
     });
