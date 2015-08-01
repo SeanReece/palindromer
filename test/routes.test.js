@@ -45,6 +45,21 @@ describe('Routing', function() {
       });
     });
     
+    it('Should add complex palindrome message', function(done) {
+      
+      request(myApp)
+      .post('/api/messages')
+      .send({text:'Poor Dan is in a droop'})
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function(err, res){
+        if (err) return done(err);
+        assert(res.body.isPalindrome);
+        palMessageID = res.body._id;
+        done();
+      });
+    });
+    
     it('Should fail without text', function(done) {
       request(myApp)
       .post('/api/messages')
