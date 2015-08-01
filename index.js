@@ -9,9 +9,11 @@ var express = require('express'),
 
 //Express
 var app = express();
+module.exports = app;
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
-app.all('*', function(req, res, next) {
+app.all('/api/*', function(req, res, next) {
     res.setHeader('Content-Type', 'application/json');
 
     res.on('finish', function(){
