@@ -14,21 +14,20 @@ module.exports.getMessage = function(req, res, next){
     var id = req.params.id;
     console.log('Message Requested: '+id);
 
-    Message.findById(id,'-__v',{ lean: true },function(err, message){
+    Message.findByIdAndUpdate(id,{$inc: {views: true}},{ lean: true },function(err, message){
         if(err) 
             return next(err);
         if(!message)
             return res.status(404).send({ reason: 'That message doesn\'t exist' });
         
         message.isPalindrome = util.isPalindrome(message.text);
+        delete message.__v;    //Remove the mongo document version - We don't need to send that!
         res.send(message);
     });  
 }
 
 //Responds to the client with a list of messages.
 module.exports.getAllMessages = function(req, res, next){
-    var limit = 100;
-        
     console.log('All Messages Requested');
 
     Message.find({},'-__v',{ lean: true },function(err, messages){
@@ -36,8 +35,15 @@ module.exports.getAllMessages = function(req, res, next){
             return next(err);
         messages.forEach(function(message) {
             message.isPalindrome = util.isPalindrome(message.text);
+            message.views = message.views + 1;
         }, this);
         res.send(messages);
+        
+        Message.update({}, {$inc: {views: true}}, {multi: true}, function(err, data){
+            if(err)
+                console.log(err); 
+            console.log(data.nModified+' messages viewed');
+        });
     });  
 }
 
