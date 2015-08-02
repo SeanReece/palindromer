@@ -22,15 +22,10 @@ db.on('disconnected', function (callback) {
 });
 
 //Schemas
-var userSchema = new mongoose.Schema({
-    since: { type: Date, default: Date.now }
-});
-
 var messageSchema = new mongoose.Schema({
     text: { type: String, required: true },
     time: { type: Date, default: Date.now },
     views: { type: Number, default: 0}
 });
 
-mongoose.model('Users', userSchema);
 mongoose.model('Messages', messageSchema);
