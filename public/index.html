@@ -15,6 +15,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
     <link href="css/jumbotron.css" rel="stylesheet">
@@ -31,24 +32,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Palindromer</a>
+          <a class="navbar-brand" href="#"><i class="fa fa-pied-piper"></i> Palindromer</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
           </ul>
         </div>
       </div>
@@ -58,7 +47,7 @@
     <div class="jumbotron">
       <div class="container">
         <h1>\ˈpa-lən-ˌdrōm\</h1>
-        <p>A word, phrase, verse, or sentence that reads the same backward or forward. <a ng-click="addDemo()">For example: A man, a plan, a canal, Panama!</a></p>
+        <p>Noun: A word, phrase, verse, or sentence that reads the same backward or forward. <a ng-click="addDemo()">For example: A man, a plan, a canal, Panama!</a></p>
         <div class="form-group form-group-lg">
           <div class="col-sm-10">
             <input class="form-control" ng-model="newMsgText" type="text" placeholder="Add a palindrome">
@@ -69,21 +58,67 @@
     </div>
 
     <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <ul class="list-group">
-          <li class="list-group-item" ng-repeat="message in messages">
-            {{message.text}} <i class="glyphicon glyphicon-ok pull-right" aria-hidden="true" ng-show="message.isPalindrome"></i>
-          </li>
-        </ul>
+      <h4>
+        Messages 
+        <span class="pull-right">Legend: 
+          <span class="label label-primary">Palindrome</span>   
+          <a class="label label-default" ng-click="doRefresh()" data-toggle="tooltip" data-placement="top" title="Refresh List"><i class="fa fa-refresh"></i></a></span>
+      </h4>
+      <hr>
+      <div ng-hide="messages.length" class="alert alert-info" role="alert">
+        <strong>Fun Fact!</strong> The word 'Palindrome' isn't a Palindrome! Also, there's no palindromes here...
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <i class="fa fa-cog fa-spin fa-4x col-md-offset-5" ng-show="messageDownloadInProgress"></i>
+      <div ng-show="errorMessageDownload" >
+        <i class="fa fa-exclamation-triangle fa-4x col-md-offset-5"></i>
+        <div class="alert alert-danger" role="alert"><strong>Uh oh!</strong> Looks like there's a cat blocking the tubes! {{err.message}}</div>
+      </div>
+      
+      <div class="list-group" ng-repeat="message in messages | orderBy:'-time'" data-toggle="modal" data-target="#myModal" ng-click="setModalContext(message)">
+        <a href="#" class="list-group-item" ng-class="{active: message.isPalindrome}">
+          <h4 class="list-group-item-heading">{{message.text}}</h4>
+          <p class="list-group-item-text">{{message.humanTime}}</p>
+        </a>
+      </div>
+      
+      <button type="button" ng-click="doRefresh()" class="btn btn-primary col-md-offset-5"><i class="fa fa-refresh"></i>  Refresh</button>
 
+      <hr>
+      
+      <p><span class="lead">Palindromer web interface</span> by Sean Reece</p>
+      <p>Angular web interface for the Palindromer API.</p>
+      <p>Check out the source on <a href="https://github.com/SeanReece/palindromer">github  <i class="fa fa-github-alt"></i></a></p>
+      
+      <a name="about"></a>
+      
       <hr>
 
       <footer>
-        <p>&copy; Company 2014</p>
+        <p>&copy; Pied Piper <i class="fa fa-pied-piper-alt fa-2x"></i></p>
       </footer>
     </div> <!-- /container -->
+    
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">{{selectedMessage.text}}</h4>
+          </div>
+          <div class="modal-body">
+            <pre>{{selectedMessage | json}}</pre>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteSelected()">Delete</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
     <!-- Bootstrap core JavaScript
@@ -95,8 +130,13 @@
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
     
   </body>
 </html>

@@ -1,25 +1,46 @@
 angular.module('palindromer', ['palindromer.services'])
 
     .controller('MessagesCtrl', function ($scope, Messages) {
-        $scope.inProgress = true;
-        Messages.getMessages().then(function(data){
+        $scope.messageDownloadInProgress = true;
+        $scope.sendMessageInProgress = true;
+    
+        $scope.doRefresh = function(){
+            Messages.getMessages().then(function(data){
                 $scope.messages = data;
-                $scope.inProgress = false;
+                $scope.messageDownloadInProgress = false;
             }, function(err){
-                $scope.inProgress = false;
+                $scope.err = err;
+                $scope.errorMessageDownload = true;
+                $scope.messageDownloadInProgress = false;
             });
+        }
 
         $scope.addMessage = function(){
-            $scope.inProgress = true;
+            $scope.sendMessageInProgress = true;
            
             Messages.addMessage($scope.newMsgText).then(function(data){
-                $scope.inProgress = false;
+                $scope.newMsgText = '';
+                $scope.sendMessageInProgress = false;
             }, function(err){
-                $scope.inProgress = false;
+                $scope.sendMessageInProgress = false;
             });
         }
         
         $scope.addDemo = function(){
-            $scope.newMsgText = "A man, a plan, a canal, Panama";
+            $scope.newMsgText = "A man, a plan, a canal, Panama!";
         }
+        
+        $scope.setModalContext = function(message){
+            $scope.selectedMessage = message;
+        }
+        
+        $scope.deleteSelected = function(){
+            Messages.deleteMessage($scope.selectedMessage).then(function(data){
+            }, function(err){
+                
+            });
+        }
+        
+        //Get the messages on load
+        $scope.doRefresh();
     })
