@@ -24,11 +24,11 @@ $ sh docker_mongo/create_mongo_container.sh
 ###Node Setup
 
 Edit config.js for your environment.
--Set debug to false. Leaving debug may cause stack traces to be sent to the client.
--Set the MongoDB server IP. Read the instructions on for which case applies to you.
+- Set debug to false. Leaving debug may cause stack traces to be sent to the client.
+- Set the MongoDB server IP. Read the instructions on for which case applies to you.
 
 Edit public/js/services.js
--Set Contants URL = http://<SERVER IP>/api
+- Set Contants URL = `http://<SERVER IP>/api`
 
 Create the node image from source
 ```
