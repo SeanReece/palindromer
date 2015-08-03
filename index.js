@@ -13,7 +13,17 @@ module.exports = app;
 app.use(bodyParser.json());
 app.use(express.static(__dirname+'/public'));
 
+//Enable CORS for preflight requests
 app.all('/api/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", '*');
+
+  if(req.method === 'OPTIONS'){
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'accept, content-type');
+    res.header('Access-Control-Max-Age', '1728000');
+    res.status(200).end();
+  }
+  else{
     res.setHeader('Content-Type', 'application/json');
 
     res.on('finish', function(){
@@ -21,6 +31,7 @@ app.all('/api/*', function(req, res, next) {
     });
 
     next();
+  }
 });
 
 //Routes
