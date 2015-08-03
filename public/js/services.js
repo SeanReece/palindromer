@@ -70,6 +70,9 @@ angular.module('palindromer.services', ['ngResource'])
         return {
             timeSince: function(date){
                 var seconds = Math.floor((new Date() - date) / 1000);
+                if(seconds <= 5){
+                    return "Just Now";
+                }
 
                 var interval = Math.floor(seconds / 31536000);
 
