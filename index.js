@@ -11,7 +11,7 @@ var express = require('express'),
 var app = express();
 module.exports = app;
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static(__dirname+'/public'));
 
 app.all('/api/*', function(req, res, next) {
     res.setHeader('Content-Type', 'application/json');
