@@ -1,4 +1,4 @@
-Palindromer
+Palindromer [![Build Status](https://travis-ci.org/SeanReece/palindromer.svg?branch=master)](https://travis-ci.org/SeanReece/palindromer)
 ===========
 A simple RESTful API to submit and view palindromes. Written using the MEAN stack.
 
