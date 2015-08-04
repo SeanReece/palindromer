@@ -2,6 +2,8 @@ Palindromer [![Build Status](https://travis-ci.org/SeanReece/palindromer.svg?bra
 ===========
 A simple RESTful API to submit and view palindromes. Written using the MEAN stack.
 
+Try it out at [palindromer.seanreece.com](http://palindromer.seanreece.com)
+
 #Setup
 Palindromer is configured to run out of the box using Docker Containers. Getting it running is as easy as running a few scripts to run the containers. 
 
@@ -24,7 +26,7 @@ Start the Node container
 ```
 $ sh docker_node/create_node_container.sh
 ```
-The script will pull the latest `seanreece/palindromer` image from docker hub (image is auto built from master) and run it in production mode and open on port 80.
+The script will pull the latest `seanreece/palindromer` image from docker hub (image is auto built from master) and run it in production mode on port 80.
 The node container is configured to auto start on AMI boot and restart if the node process stops.
 
 ##On OSX
@@ -50,12 +52,20 @@ Run palindromer
 $ node index.js
 ```
 
-#Tests
+Tests
+=====
 Palindromer comes with some basic API tests using mocha and supertest. 
 To run the tests first make sure palindromer is running locally then execute this command
 ```
 $ npm test
 ```
+
+# API Endpoints
+###Messages
+- [**`POST` messages**](https://github.com/SeanReece/palindromer/blob/master/docs/POST_messages.md) Add a single message
+- [**`GET` messages**](https://github.com/SeanReece/palindromer/blob/master/docs/GET_messages.md) Retrieve all massages
+- [**`GET` messages/:id**](https://github.com/SeanReece/palindromer/blob/master/docs/GET_messages_id.md) Get a specific message
+- [**`DELETE` messages/:id**](https://github.com/SeanReece/palindromer/blob/master/docs/DELETE_messages_id.md) Delete a specific message
 
 
 
