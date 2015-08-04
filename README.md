@@ -52,8 +52,7 @@ Run palindromer
 $ node index.js
 ```
 
-Tests
-=====
+# Tests
 Palindromer comes with some basic API tests using mocha and supertest. 
 To run the tests first make sure palindromer is running locally then execute this command
 ```
@@ -66,6 +65,14 @@ $ npm test
 - [**`GET` messages**](https://github.com/SeanReece/palindromer/blob/master/docs/GET_messages.md) Retrieve all massages
 - [**`GET` messages/:id**](https://github.com/SeanReece/palindromer/blob/master/docs/GET_messages_id.md) Get a specific message
 - [**`DELETE` messages/:id**](https://github.com/SeanReece/palindromer/blob/master/docs/DELETE_messages_id.md) Delete a specific message
+
+# Sequence Diagrams
+Some possible use cases shown using sequence diagrams.
+###User adds a message
+![User Adds a Message diagram](docs/addMessageDiagram.png?raw=true)
+
+###User requests all messages then deletes a single message
+![User Requests Messages then Deletes One](docs/retrieveDeleteMessageDiagram.png?raw=true)
 
 
 
