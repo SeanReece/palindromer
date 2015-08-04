@@ -8,9 +8,9 @@ RUN yum -y install nodejs
 RUN yum -y install gcc-c++ make
 
 # Bundle app source
-COPY . /src
+COPY . /srv
 # Install app dependencies
-RUN cd /src; npm install --production
+RUN cd /srv; npm install --production
 
 EXPOSE  8080
-CMD ["node", "/src/index.js"]
+CMD ["node", "/srv/index.js"]

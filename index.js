@@ -55,4 +55,4 @@ app.use(function(err, req, res, next){
 
 //Start Server
 app.listen(config.port);
-console.log('Listening on port '+config.port+'...');
+console.log('Listening on port '+config.port+' ('+config.env+" mode)");

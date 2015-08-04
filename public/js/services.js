@@ -3,7 +3,8 @@
 angular.module('palindromer.services', ['ngResource'])
 
     .factory('Constants', function(){
-        var url = 'http://localhost:8080/api';
+        //var url = 'http://localhost:8080/api';            //For development
+        var url = 'http://palindromer.seanreece.com/api';   //For production
     
         return{
             getUrl: function() { return url; }
