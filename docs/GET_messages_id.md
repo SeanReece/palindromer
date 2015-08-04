@@ -7,7 +7,7 @@ Retrieve a single specific message.
 None
 
 ## Parameters
-- **id** — The ID of the message returned from a previous request to the API.
+- **id** _(required)_ — The ID of the message returned from a previous request to the API.
 
 ## Return format
 A single message.
@@ -18,7 +18,8 @@ A single message.
 - **isPalindrome** — Boolean representing whether the message is a palindrome or not.
 
 ## Errors
-None
+- **`400`** — The id was missing or invalid.
+- **`400`** — The message does not exist.
 
 
 ## Example
