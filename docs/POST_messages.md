@@ -1,7 +1,7 @@
 # POST /api/messages
 
 ## Description
-Add a new message. Message (if accepted) will be stored and is publicly available using the [**`GET` messages**](https://github.com/500px/api-documentation/blob/master/docs/GET_messages.md) endpoint.
+Add a new message. Message (if accepted) will be stored and is publicly available using the [**`GET` messages**](https://github.com/SeanReece/palindromer/blob/master/docs/GET_messages.md) endpoint.
 
 
 ## Authentication
