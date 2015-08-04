@@ -10,8 +10,6 @@ Palindromer is configured to run out of the box using Docker Containers. Getting
 Install Docker - [On EC2](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html#install_docker)
 
 ###Mongo Setup
-Palindromer needs to be configured to connect to the proper MongoDB.
-
 Palindromer uses MongoDB as a database. For convenience, a script has been included to run Mongo in a docker container.
 
 The docker container uses the WiredTiger storage engine by default to make the best use of the limited RAM and disk space on an amazon EC2 instance. Since WiredTiger compresses all documents and indexes by default less RAM and disk space is used.
@@ -22,23 +20,11 @@ $ sh docker_mongo/create_mongo_container.sh
 ```
 
 ###Node Setup
-
-Edit config.js for your environment.
-- Set debug to false. Leaving debug may cause stack traces to be sent to the client.
-- Set the MongoDB server IP. Read the instructions on for which case applies to you.
-
-Edit public/js/services.js
-- Set Contants URL = `http://<SERVER IP>/api`
-
-Create the node image from source
-```
-$ sh docker_node/create_node_image.sh
-```
 Start the Node container
 ```
 $ sh docker_node/create_node_container.sh
 ```
-
+The script will pull the latest `seanreece/palindromer` image from docker hub (image is auto built from master) and run it in production mode and open on port 80.
 The node container is configured to auto start on AMI boot and restart if the node process stops.
 
 ##On OSX
