@@ -1,7 +1,7 @@
 # GET /api/messages
 
 ## Description
-Retrieve a list of all messages. To retrieve a single message use [**`GET` messages/:id**](https://github.com/500px/api-documentation/blob/master/docs/GET_messages_id.md) endpoint.
+Retrieve a list of all messages. To retrieve a single message use [**`GET` messages/:id**](https://github.com/SeanReece/palindromer/blob/master/docs/GET_messages_id.md) endpoint.
 
 
 ## Authentication
