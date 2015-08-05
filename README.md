@@ -66,6 +66,16 @@ $ npm test
 - [**`GET` messages/:id**](https://github.com/SeanReece/palindromer/blob/master/docs/GET_messages_id.md) Get a specific message
 - [**`DELETE` messages/:id**](https://github.com/SeanReece/palindromer/blob/master/docs/DELETE_messages_id.md) Delete a specific message
 
+# Architecture
+Palindromer is implemented using AWS using the following resources:
+- **EC2** (Elastic Compute Cloud)
+    - An instance running MongoDB in a docker container. (A replica set should be used in production)
+    - An instance running the palindromer node container is configured and an AMI is created. Multiple instances of this AMI will be launched by the ASG.
+- **ASG** (Auto Scaling Groups)
+    - An auto scaling group is used to spawn new EC2 instances using the palinromer node AMI based on load.
+- **ELB** (Elastic Load Balancer)
+    - ELB is used to distribute http requests evenly accross running EC2 instances.
+
 # Sequence Diagrams
 Some possible use cases shown using sequence diagrams.
 ###User adds a message
